@@ -15,7 +15,7 @@ bool cadastrar_paciente(char *nome, char *endereco, char *telefone, data_std nas
     int newCode = 10000 + rand() % (99999 - 10000);
     int code_aux;
 
-    pacientes = fopen("pacientes.txt", "r");
+    pacientes = fopen("./armazenamento/pacientes.txt", "r");
 
     while (!feof(pacientes))
     {
@@ -84,7 +84,7 @@ bool cadastrar_paciente(char *nome, char *endereco, char *telefone, data_std nas
 
     if (!existe)
     {
-        pacientes = fopen("pacientes.txt", "a");
+        pacientes = fopen("./armazenamento/pacientes.txt", "a");
         char *buffer = (char *)malloc(1024);
         char *num_aux = (char *)malloc(20);
 
@@ -149,18 +149,27 @@ void coleta_dados_paciente(paciente_std *paciente_dados, data_std *nas_aux)
     gets(paciente_dados->nome);
 
     printf("\nNascimento\n");
-    printf("Dia -> ");
-    fflush(stdin);
-    scanf("%u", &aux_num);
-    nas_aux->dia = aux_num;
-    printf("Mês -> ");
-    fflush(stdin);
-    scanf("%u", &aux_num);
-    nas_aux->mes = aux_num;
-    printf("Ano -> ");
-    fflush(stdin);
-    scanf("%u", &aux_num);
-    nas_aux->ano = aux_num;
+    do
+    {
+        printf("Dia -> ");
+        fflush(stdin);
+        scanf("%u", &aux_num);
+        nas_aux->dia = aux_num;
+    } while (aux_num <= 0 || aux_num > 31);
+    do
+    {
+        printf("Mês -> ");
+        fflush(stdin);
+        scanf("%u", &aux_num);
+        nas_aux->mes = aux_num;
+    } while (aux_num <= 0 || aux_num > 12);
+    do
+    {
+        printf("Ano -> ");
+        fflush(stdin);
+        scanf("%u", &aux_num);
+        nas_aux->ano = aux_num;
+    } while (aux_num <= 0);
 
     printf("\nEndereço\n");
     printf("Rua -> ");

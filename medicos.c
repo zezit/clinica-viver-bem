@@ -16,7 +16,7 @@ bool cadastrar_medicos(char *nome, char *especialidade, char *telefone)
     int newCode = 10000 + rand() % (99999 - 10000);
     int code_aux;
 
-    medicos = fopen("medicos.txt", "r");
+    medicos = fopen("./armazenamento/medicos.txt", "r");
 
     while (!feof(medicos))
     {
@@ -77,7 +77,7 @@ bool cadastrar_medicos(char *nome, char *especialidade, char *telefone)
 
     if (!existe)
     {
-        medicos = fopen("medicos.txt", "a");
+        medicos = fopen("./armazenamento/medicos.txt", "a");
         char *buffer = (char *)malloc(1024);
         char *num_aux = (char *)malloc(20);
 
